@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+        <p:layout fullPage="true" style="min-width: 400px;min-height: 400px;"> 
+            <p:layoutUnit position="north" size="180">
+                <h:graphicImage alt="Student Fees" style="min-width: 170px;min-height: 170px;" url="logo.png"/>
+            </p:layoutUnit>
+            <p:layoutUnit position="east" size="400">
+                <h:form>
+                <p:growl id="growl" sticky="true" />
+                    <p:panel style="border: none;">
+                        <f:facet name="header">
+                            <h:outputText value="Login Here"/>
+                        </f:facet>
+                        <h:panelGrid columns="2">
+                            <h:outputText style="font-size:15px;font-weight: bold;color: #4B4B4B;" value="Org Name"/>
+                            <p:autoComplete completeMethod="#{orgLogoDetails.details}" value="#{orgLoginDetails.orgId}" style="font-size:15px;font-weight: bold;color: #4B4B4B; width: 220px;" var="orgDe" forceSelection="true" itemLabel="#{orgDe.orgName}" itemValue="#{orgDe.orgId}">
+                                <p:column>
+                                    <h:outputText value="#{orgDe.orgName}"></h:outputText>
+                                </p:column> 
+                                <p:column>
+                                <h:outputText value="#{orgDe.orgWeb}"/>
+                                </p:column>
+                            </p:autoComplete>
+                            <h:outputText style="font-size:15px;font-weight: bold;color: #4B4B4B;" value="Email Id"/>
+                            <p:inputText id="emailid" value="#{orgLoginDetails.adminId}"/>
+                            <h:outputText style="font-size:15px;font-weight: bold;color: #4B4B4B;" value="Password"/>
+                            <p:password id="password" value="#{orgLoginDetails.orgPassword}"/>
+                        </h:panelGrid>
+                        <f:facet name="footer">
+                            <p:commandButton value="Login" icon="ui-icon-disk" style="font-size:14px;font-weight: bold;color: #4B4B4B;" action="#{orgLoginDetails.validate}" update="growl"/>
+                            <p:commandButton value="Register New College" action="OrgProfile/RegisterProfile.xhtml" icon="ui-icon-disk" style="font-size:14px;font-weight: bold;color: #4B4B4B; "/>
+                        </f:facet>
+                    </p:panel>
+                    <p:tooltip style="font-size:12px;font-weight: bold;color: #4B4B4B;" for="emailid" value="Your Email Id Should Be Same As You Have Registered In Brihaspati" showEffect="clip" hideEffect="explode" />
+                </h:form>
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
+

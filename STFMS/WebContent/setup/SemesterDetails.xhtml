@@ -1,0 +1,128 @@
+
+<?xhtml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>TODO supply a title</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Degree Type">
+			<h:panelGrid columns="1">
+				<p:commandButton onclick="pnl.show();" value="Add New" />
+				<p:panel>
+					<p:dataTable id="dataTable" var="dt"
+						style="font-size: 13px;font-weight: bold"
+						binding="#{semesterBeans.dataGrid}"
+						value="#{semesterBeans.loadAllSemesterDetails}" paginator="true"
+						rows="10"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15,20,25,30,35,40,45,50">
+						<f:facet name="header">  
+            			Degree Type Of Institutes  
+        			   </f:facet>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Semester Code" />
+							</f:facet>
+							<h:outputText value="#{dt.semSeqNo}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Semester Name" />
+							</f:facet>
+							<p:inplace id="domain" toggleable="true" editor="true">
+									<p:inputText value="#{dt.semesterName}" />
+								</p:inplace>
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Department Name" />
+							</f:facet>
+							<h:outputText value="#{dt.departmentName}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Degree Name" />
+							</f:facet>
+							<h:outputText value="#{dt.degreeName}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Semester Begning Date" />
+							</f:facet>
+							<h:outputText value="#{dt.semesterBegningDate}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Semester Ending Date" />
+							</f:facet>
+							<h:outputText value="#{dt.semesterEndingDate}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Semester Creater Id" />
+							</f:facet>
+							<h:outputText value="#{dt.semCreaterId}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Semester Created Date" />
+							</f:facet>
+							<h:outputText value="#{dt.semCreaterDate}" />
+						</p:column>
+					</p:dataTable>
+					<f:facet name="footer">
+						<p:commandButton value="Update" update="dataTable" action="#{semesterBeans.update}"/>
+					</f:facet>
+				</p:panel>
+			</h:panelGrid>
+		</p:panel>
+		<p:dialog header="Add New Type" width="340" height="240"
+			widgetVar="pnl" modal="true">
+			<h:panelGrid columns="2">
+				<h:outputText value="Semester Name " />
+				<p:inputText value="#{semesterBeans.semesterName}" />
+				<h:outputText value="Department Type " />
+				<p:selectOneMenu
+					style="width: 160px;font-size: 16px; font-weight: bold;"
+					value="#{semesterBeans.departmentCode}">
+					<f:selectItems value="#{orgDepartmentType.items}" />
+				</p:selectOneMenu>
+				<h:outputText value="Degree Type " />
+				<p:selectOneMenu
+					style="width: 160px;font-size: 16px; font-weight: bold;"
+					value="#{semesterBeans.degreeCode}">
+					<f:selectItems value="#{orgDegreeType.items}" />
+				</p:selectOneMenu>
+				<h:outputText value="Exam Session Name" />
+				<p:selectOneMenu
+					style="width: 160px;font-size: 16px; font-weight: bold;"
+					value="#{semesterBeans.examCode}">
+					<f:selectItems value="#{examCodeSetUp.items}" />
+				</p:selectOneMenu>
+				<f:facet name="footer">
+					<p:commandButton value="Save"
+						action="#{semesterBeans.saveSemester}" update="dataTable" />
+					<p:commandButton value="Close" onclick="pnl.hide();" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+
+		<p:dialog widgetVar="dialog" modal="true">
+			<h:panelGrid id="display" columns="2" cellpadding="5">
+
+
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

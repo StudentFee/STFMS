@@ -1,0 +1,106 @@
+
+<?xhtml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>TODO supply a title</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Degree Type">
+			<h:panelGrid columns="1">
+				<p:commandButton onclick="pnl.show();" value="Add New" />
+				<p:panel>
+					<p:dataTable id="dataTable" var="dt"
+						style="font-size: 14px;font-weight: bold"
+						binding="#{orgDegreeType.dataGrid}"
+						value="#{orgDegreeType.loadAllDegreeType}" paginator="true"
+						rows="10"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15,20,25,30,35,40,45,50">
+						<f:facet name="header">  
+            			Degree Type Of Institutes  
+        			   </f:facet>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Degree Name" />
+							</f:facet>
+							<p:inplace id="domain" toggleable="true" editor="true">
+								<p:inputText value="#{dt.degreeName}" />
+							</p:inplace>
+
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Department Name" />
+							</f:facet>
+							<h:outputText value="#{dt.orgDepartmentName}"/>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Degree Creater Id" />
+							</f:facet>
+							<h:outputText value="#{dt.degreeCreatorId}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Degree Modifier Id" />
+							</f:facet>
+							<h:outputText value="#{dt.degreeModifierId}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Degree Creater Time" />
+							</f:facet>
+							<h:outputText value="#{dt.degreeCreatedDateTime}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Degree Modifier Time" />
+							</f:facet>
+							<h:outputText value="#{dt.degreeModifierDateTime}" />
+						</p:column>
+					</p:dataTable>
+					<f:facet name="footer">
+						<p:commandButton value="Update" update="dataTable"
+							action="#{orgDegreeType.update}" />
+					</f:facet>
+				</p:panel>
+			</h:panelGrid>
+		</p:panel>
+		<p:dialog header="Add New Type" width="300" height="240"
+			widgetVar="pnl" modal="true">
+			<h:panelGrid columns="2">
+				<h:outputText value="Degree Type " />
+				<p:inputText value="#{orgDegreeType.degreeName}" />
+				<h:outputText value="Department Type " />
+				<p:selectOneMenu
+					style="width: 160px;font-size: 16px; font-weight: bold;"
+					value="#{orgDegreeType.orgDegreeDpType}">
+					<f:selectItems value="#{orgDepartmentType.items}" />
+				</p:selectOneMenu>
+				<f:facet name="footer">
+					<p:commandButton value="Save"
+						action="#{orgDegreeType.saveDegreeType}" update="dataTable" />
+					<p:commandButton value="Close" onclick="pnl.hide();" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+
+		<p:dialog widgetVar="dialog" modal="true">
+			<h:panelGrid id="display" columns="2" cellpadding="5">
+
+
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

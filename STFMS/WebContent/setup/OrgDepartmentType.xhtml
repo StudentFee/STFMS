@@ -1,0 +1,84 @@
+
+<?xhtml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>TODO supply a title</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Department Type">
+			<h:panelGrid columns="1">
+				<p:commandButton onclick="pnl.show();" value="Add New" />
+				<p:panel>
+					<p:dataTable id="degreeTable" var="dt" style="font-size: 14px;font-weight: bold" binding="#{orgDepartmentType.dataGrid}"
+						value="#{orgDepartmentType.loadAllDepartmentType}" paginator="true" rows="10"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15,20,25,30,35,40,45,50">
+						<f:facet name="header">  
+            			Degree Type Of Institutes  
+        			   </f:facet>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Department Name" />
+							</f:facet>
+							<p:inplace id="domain" toggleable="true" editor="true">
+								<p:inputText value="#{dt.orgDepartmentName}" />
+							</p:inplace>
+
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Department Creater Id" />
+							</f:facet>
+							<h:outputText value="#{dt.depatmentCreaterId}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Department Modifier Id" />
+							</f:facet>
+							<h:outputText value="#{dt.depatmentModifierId}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Department Creater Time" />
+							</f:facet>
+							<h:outputText value="#{dt.depatmentCreaterDate}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Department Modifier Time" />
+							</f:facet>
+							<h:outputText value="#{dt.depatmentModifierDate}" />
+						</p:column>
+					</p:dataTable>
+					<f:facet name="footer">
+							<p:commandButton value="Update" update="degreeTable" action="#{orgDepartmentType.update}"/> 
+					</f:facet>
+				</p:panel>
+			</h:panelGrid>
+		</p:panel>
+		<p:dialog header="Add New Type" width="300" height="240"
+			widgetVar="pnl" modal="true">
+			<h:panelGrid columns="2">
+				<h:outputText value="Department Type " />
+				<p:inputText value="#{orgDepartmentType.orgDepartmentName}" />
+				<f:facet name="footer">
+					<p:commandButton value="Save" action="#{orgDepartmentType.saveDepartment}"
+						update="degreeTable @parent">
+							
+						</p:commandButton>
+					<p:commandButton value="Close" onclick="pnl.hide();" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>
